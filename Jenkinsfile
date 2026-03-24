@@ -58,7 +58,7 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                sh 'docker push pavansai33/pavan1img:v1'
+                sh 'docker push pavansai33/pavan1img:v21'
             }
         }
 
