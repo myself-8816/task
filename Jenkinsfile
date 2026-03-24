@@ -32,10 +32,10 @@ pipeline{
         sh'docker tag chittiimg varsha0411/chittiimg:v1'
       }
     }
-    stage('Login to Docker Hub') {
+   stage('Login to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
+                    credentialsId: 'docke-cred',
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
