@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'mymav'
+        maven 'maven'
     }
 
     stages {
@@ -12,7 +12,7 @@ pipeline {
                 checkout scmGit(
                     branches: [[name: '*/main']],
                     extensions: [],
-                    userRemoteConfigs: [[credentialsId: 'dockerhub-creds', url: 'https://github.com/varsha-0411/task6.git']]
+                    userRemoteConfigs: [[credentialsId: 'dockerhub-creds', url: 'https://github.com/myself-8816/task.git']]
                 )
             }
             post {
@@ -20,7 +20,7 @@ pipeline {
                     emailext(
                         subject: "Checkout Success",
                         body: "Checkout completed",
-                        to: "varshachowdary411@gmail.com"
+                        to: "pavansai131299@gmail.com"
                     )
                 }
             }
@@ -34,13 +34,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t chittiimg .'
+                sh 'docker build -t pavan1img .'
             }
         }
 
         stage('Tag Docker Image') {
             steps {
-                sh 'docker tag chittiimg varsha0411/chittiimg:v1'
+                sh 'docker tag pavan1img pavansai33/pavan1img:v21'
             }
         }
 
@@ -58,7 +58,7 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                sh 'docker push varsha0411/chittiimg:v1'
+                sh 'docker push pavansai33/pavan1img:v1'
             }
         }
 
@@ -68,7 +68,7 @@ pipeline {
                 sh '''
                 export KUBECONFIG=$KUBECONFIG
                 kubectl get nodes
-                kubectl apply -f 6and7.yml
+                kubectl apply -f saipavan.yml
                 '''
         }
     }
