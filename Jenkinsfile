@@ -1,7 +1,7 @@
 pipeline{
   agent any
   tools{
-    maven 'mymav'
+    maven 'mymav'}
   stages{
     stage('git checkout'){
       steps{
@@ -19,17 +19,17 @@ pipeline{
     }
     stage('Build WAR file'){
       steps{
-        sh'mvn clean package'
+        sh 'mvn clean package'
       }
     }
     stage('Build docker image'){
       steps{
-        sh'docker build -t chittiimg .'
+        sh 'docker build -t chittiimg .'
       }
     }
     stage('tag_img'){
       steps{
-        sh'docker tag chittiimg varsha0411/chittiimg:v1'
+        sh 'docker tag chittiimg varsha0411/chittiimg:v1'
       }
     }
    stage('Login to Docker Hub') {
@@ -45,12 +45,12 @@ pipeline{
         }
     stage('docker_push'){
       steps{
-        sh'docker push varsha0411/chittiimg:v1'
+        sh 'docker push varsha0411/chittiimg:v1'
       }
     }
     stage('k8s_deployment'){
       steps{
-        sh'kubectl apply -f 6and7.yml'
+        sh 'kubectl apply -f 6and7.yml'
       }
     }
   }
