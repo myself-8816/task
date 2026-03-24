@@ -64,9 +64,15 @@ pipeline {
 
         stage('K8s Deployment') {
             steps {
-                sh 'kubectl apply -f 6and7.yml'
-            }
+              withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                sh '''
+                export KUBECONFIG=$KUBECONFIG
+                kubectl get nodes
+                kubectl apply -f 6and7.yml
+                '''
         }
+    }
+}
 
     } 
 } 
